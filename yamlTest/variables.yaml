@@ -1,0 +1,13 @@
+dis_preffix: dis-receiver
+vpc_id: vpc-e9ccd88e
+ssh_keypair: tsu-udp-test
+ecs_cluster_instance_type: m5n.xlarge
+ecs:
+  cluster:
+    instance_type: m5n.xlarge
+    desired_capacity: 4
+    max_capacity: 4
+    min_capacity: 4
+    rafael:
+      - asdas: asd
+      - sdfsd: 123
