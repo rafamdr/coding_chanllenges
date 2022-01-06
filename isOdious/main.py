@@ -44,4 +44,25 @@ examples = {
 sol = Solution()
 for ex in examples:
     print('Ref..: %d -> %s : %s' % (ex, examples[ex], str(sol.is_odious(ex))))
+
+    from typing import List
+
+
+def reorder(items: List[str], indexes: List[int]) -> List[str]:
+    return [i[1] for i in sorted(enumerate(items), key=lambda x:
+
+
+def reorder_v2(items: List[str], indexes: List[int]) -> List[str]:
+    result_array = [''] * len(items)
+
+    for idx in indexes:
+        result_array[idx] = items[idx]
+
+    return result_array
+
+
+items = ["C", "D", "E", "F", "G", "H"]
+indexes = [3, 0, 4, 1, 2, 5]
+
+print(reorder_v2(items, indexes))
 # ----------------------------------------------------------------------------------------------------------------------
