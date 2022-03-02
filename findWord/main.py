@@ -36,11 +36,16 @@ class WordGrid:
     def _check_direction(
             self, grid: List[List[str]], word: str, ni: int, nj: int, direction: Tuple[int]
     ) -> Optional[List[Tuple[int]]]:
-        rows, cols = len(grid), len(grid[0])
         result = []
-        while (0 <= ni < rows) and (0 <= nj < cols) and (word[len(result)] == grid[ni][nj]):
-            result.append((ni, nj))
-            ni, nj = ni + direction[0], nj + direction[1]
+        rows, cols = len(grid), len(grid[0])
+        wdx, wdy = (len(word) - 1 - ni) * direction[0], (len(word) - 1 - nj) * direction[1]
+        if 0 <= wdx < len(word) or 0 <= wdy < len(word):
+            while (
+                (0 <= ni < rows) and (0 <= nj < cols) and
+                len(result) < len(word) and (word[len(result)] == grid[ni][nj])
+            ):
+                result.append((ni, nj))
+                ni, nj = ni + direction[0], nj + direction[1]
         return result if len(result) == len(word) else None
 
     def find_word(self, grid: List[List[str]], word: str) -> List[List[str]]:
@@ -94,10 +99,10 @@ examples = {
         ]
     },
     'peor': {
-        'input': [
+        'input':  [
             ['d', 'a', 'q', 't'],
             ['x', 'c', 'w', 'e'],
-            ['r', 'o', 'e', 'p']
+            ['*', '*', '*', '*']
         ],
         'output': [
             ['d', 'a', 'q', 't'],
@@ -112,7 +117,10 @@ def print_horizontal_matrixes(mat_list: List[List[List[str]]]):
     rows_size = len(mat_list[0])
     for row in range(0, rows_size):
         for mat in mat_list:
-            print('[%s]' % (', '.join(mat[row])), end='\t\t')
+            if row < len(mat):
+                print('[%s]' % (', '.join(mat[row])), end='\t\t')
+            else:
+                print(end='\t\t')
         print()
 
 
